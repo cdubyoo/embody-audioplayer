@@ -7,4 +7,20 @@ class Audio(models.Model):
     thumbnail = models.ImageField()
 
     def _str_(self):
-        return self.title
+        return self.title + ' - ' + self.artist
+
+class Comment(models.Model):
+    audio = models.ForeignKey(Audio, on_delete=models.CASCADE)
+    user = models.CharField(max_length=16)
+    body =  models.TextField()
+    timestamp_minutes = models.CharField(max_length=2)
+    timestamp_seconds = models.CharField(max_length=2)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['created']
+
+    def _str_ (self):
+        return 'Comment {} by {} at {}:{}'.format(
+            self.body, self.user, self.timestamp_minutes, self.timestamp_seconds
+        )
