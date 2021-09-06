@@ -6,14 +6,14 @@ import axios from "axios";
 function App() {
   const [audio, setAudio] = useState([])
 
-    useEffect(() => {
-      const fetchData = async () => {
-        const result = await axios('/api/audios');
-        setAudio(result.data); 
-      };
-      fetchData();
-      
-    }, [])
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios('/api/audios');
+      setAudio(result.data); 
+    };
+    fetchData();
+    
+  }, [])
 
 
   return (
