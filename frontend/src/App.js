@@ -1,18 +1,28 @@
-import React from "react";
-import './index.css'
-
+import React, { useEffect, useState } from "react";
+import './index.css';
+import axios from "axios";
 
 
 function App() {
-  /* const audio =  {
-  title: "Relaxation Music",
-  artist: "Kevin Manickam",
-  thumbnail: ""
-  }
-  */
+  const [audio, setAudio] = useState([])
+
+    useEffect(() => {
+      const fetchData = async () => {
+        const result = await axios('/api/audios');
+        setAudio(result.data); 
+      };
+      fetchData();
+      
+    }, [])
+
+
   return (
     <div className="container">
-      Song
+      {audio.map(item => (
+        <li key={item.id}>
+          {item.title} by {item.artist}
+        </li>
+      ))}
     </div>
   );
 }
