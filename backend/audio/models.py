@@ -10,7 +10,7 @@ class Audio(models.Model):
         return self.title + ' - ' + self.artist
 
 class Comment(models.Model):
-    audio = models.ForeignKey(Audio, on_delete=models.CASCADE)
+    audio = models.ForeignKey(Audio, related_name='comment', on_delete=models.CASCADE)
     user = models.CharField(max_length=16)
     body =  models.TextField()
     timestamp_minutes = models.CharField(max_length=2)
