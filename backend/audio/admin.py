@@ -6,7 +6,7 @@ class AudioAdmin(admin.ModelAdmin):
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = (
-        'audio', 'user', 'body', 'timestamp_minutes', 'timestamp_seconds'
+        'audio', 'user', 'body', 'timestamp_seconds'
     )
 
 # Register your models here.

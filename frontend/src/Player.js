@@ -34,6 +34,7 @@ function Player({ url }) {
 
         wavesurfer.current.on('ready', function() {
         
+        // turn play on when reloading component or playing new song
         // wavesurfer.current.play();
         // setPlay(true);
 
@@ -48,45 +49,44 @@ function Player({ url }) {
         return () => wavesurfer.current.destroy();
     }, [url]);
 
-// toggles play and pause
-const handlePlayPause = () => {
-    setPlay(!playing);
-    // toggles ref as well
-    wavesurfer.current.playPause();
-};
+    // toggles play and pause
+    const handlePlayPause = () => {
+        setPlay(!playing);
+        // toggles ref as well
+        wavesurfer.current.playPause();
+    };
 
-// changes volume state
-const onVolumeChange = e => {
-    const { target } = e;
-    const newVolume = +target.value;
-    // checks for change in volume, and sets state and points ref
-    if (newVolume) {
-    setVolume(newVolume);
-    wavesurfer.current.setVolume(newVolume);
-    }
-};
+    // changes volume state
+    const onVolumeChange = e => {
+        const { target } = e;
+        const newVolume = +target.value;
+        // checks for change in volume, and sets state and points ref
+        if (newVolume) {
+        setVolume(newVolume);
+        wavesurfer.current.setVolume(newVolume);
+        }
+    };
 
-return (
-    <div>
-    <div id="waveform" ref={waveformRef} />
-    <div className="controls">
-        <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
-        <input
-        type="range"
-        id="volume"
-        name="volume"
-        // waveSurfer recognize value of 0 same as 1
-        // so set 0.01 for silence
-        min="0.01"
-        max="1"
-        step=".025"
-        onChange={onVolumeChange}
-        defaultValue={volume}
-        />
-        <label htmlFor="volume">Volume</label>
-    </div>
-    </div>
-    );
+    return (
+        <div>
+        <div id="waveform" ref={waveformRef} />
+            <div className="controls">
+                <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
+                <input
+                type="range"
+                id="volume"
+                name="volume"
+                // wavesurfer recognize value of 0 same as 1, so silence = 0.01
+                min="0.01"
+                max="1"
+                step=".025"
+                onChange={onVolumeChange}
+                defaultValue={volume}
+                />
+                <label htmlFor="volume">Volume</label>
+            </div>
+        </div>
+        );
 }
 
 export default Player
