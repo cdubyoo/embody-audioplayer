@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import serializers, viewsets
 from .serializers import AudioSerializer, CommentSerializer
 from .models import Audio, Comment
 
@@ -13,3 +13,9 @@ class AudioView(viewsets.ModelViewSet):
 class CommentView(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     queryset = Comment.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        if request.data.get('id'):
+            return super(CommentView, self).update(request, *args, **kwargs)
+        else:
+            return super(CommentView, self).create(request, *args, **kwargs)

@@ -14,7 +14,7 @@ const formWaveSurferOptions = () => ({
   });
 
 // audio player that takes in url of audio
-function Player({ url }) {
+const Player = ({ url }) => {
     // set ref to elements to replace old ones when react rerenders
     const waveformRef = useRef(null);
     const wavesurfer = useRef(null);

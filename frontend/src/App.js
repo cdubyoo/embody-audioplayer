@@ -3,6 +3,7 @@ import "./index.css";
 import axios from "axios";
 import Player from "./Player";
 import audiotrack1 from './audiotrack1.wav';
+import Comment from "./Comment";
 
 function App() {
   const [audio, setAudio] = useState([])
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="container">
       <Player url={audiotrack1} />
+      <Comment />
       {audio.map(item => (
         <li key={item.id}>
           {item.title} by {item.artist}
