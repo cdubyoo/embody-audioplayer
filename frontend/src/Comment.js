@@ -16,7 +16,7 @@ const Comment = () => {
             setAudio(result.data); 
         };
         fetchData();
-    }, [audio])
+    }, [])
     
 
     // turn time stamp seconds into mm:ss
@@ -25,14 +25,18 @@ const Comment = () => {
   }
     const handleSubmit = (e) => {
         e.preventDefault()
+        // chain api requests to update audio state to re-render comment section
         axios.post('/api/comments/',  
-                {
-                    audio: 1,
-                    user: user,
-                    body: body,
-                    timestamp_seconds: 30
-    
-                }, {headers: { 'X-CSRFToken': csrftoken }}) 
+            {
+                audio: 1,
+                user: user,
+                body: body,
+                timestamp_seconds: 30
+            }, {headers: { 'X-CSRFToken': csrftoken }})
+            .then(
+                axios.get('/api/audios')
+                    .then(res => setAudio(res.data))
+            )
     }
 
     return(
