@@ -122,6 +122,7 @@ const Player = ({ url }) => {
     return (
         <div>
         <div id="waveform" ref={waveformRef} />
+            
             <div className="controls">
                 <button onClick={handlePlayPause}>{!playing ? "Play" : "Pause"}</button>
                 <input
